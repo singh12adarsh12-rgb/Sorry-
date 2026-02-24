@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    background: linear-gradient(to bottom right, #0f0f1a, #1c1c3a);
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+    text-align:center;
+    overflow-x:hidden;
+}
+
+.container{
+    padding:40px 20px;
+    animation: fadeIn 3s ease-in-out;
+}
+
+.lyrics{
+    max-width:800px;
+    margin:30px auto;
+    font-size:20px;
+    line-height:1.8;
+    white-space:pre-line;
+}
+
+.note{
+    max-width:750px;
+    margin:50px auto;
+    font-size:19px;
+    line-height:1.8;
+    background: rgba(255,255,255,0.08);
+    padding:30px;
+    border-radius:20px;
+    backdrop-filter: blur(10px);
+}
+
+button{
+    padding:15px 35px;
+    font-size:18px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    margin:20px;
+    transition:0.3s;
+}
+
+.yes{
+    background:#ff4e6a;
+    color:white;
+}
+
+.yes:hover{
+    transform:scale(1.1);
+    background:#ff2e52;
+}
+
+.no{
+    background:gray;
+    color:white;
+    pointer-events:none; /* makes it unclickable */
+    opacity:0.6;
+}
+
+.hidden{
+    display:none;
+}
+
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- Add your own mp3 file named song.mp3 -->
+<audio autoplay loop>
+    <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+
+<div class="lyrics">
+✨🌙 Hmmm… hmmm… 🌙✨
+
+Dehleez pe mere dil ki ❤️🚪  
+Jo rakhe hain tune kadam 👣💫  
+Tere naam pe meri zindagi 📝💕  
+Likh di, mere humdum 💖🌹  
+
+Haan sikha maine jeena… jeena kaise jeena 🌸✨  
+Haan sikha maine jeena, mere humdum 💞🥹  
+Na sikha kabhi jeena… jeena kaise jeena 💭🌧️  
+Na sikha jeena tere bina, humdum 💔🌌  
+
+💫💞  
+
+Dehleez pe mere dil ki ❤️🚪  
+Jo rakhe hain tune kadam 👣💫  
+Tere naam pe meri zindagi 📝💕  
+Likh di, mere humdum 💖🌹  
+
+Haan sikha maine jeena… jeena kaise jeena 🌸✨  
+Haan sikha maine jeena, mere humdum 💞🥹  
+Na sikha kabhi jeena… jeena kaise jeena 💭🌧️  
+Na sikha jeena tere bina, humdum 💔🌌  
+
+🌹✨ Tum ho toh zindagi hai… tum nahi toh bas khamoshi hai. ✨🌹
+</div>
+
+<div class="note">
+I know mere bachpana (immaturity) ki wajah se tum kaafi pareshan ho gayi ho, and I totally get why you don’t want to be in a relationship right now. 😔  
+I’ve realized ki sirf "sorry" bolne se ab kuch nahi hoga, mujhe apne actions se prove karna padega. 🛠️  
+
+Main sach mein apne aap ko change kar raha hoon — not just for us, but for myself too. 🧘‍♂️  
+I don’t want to be that immature guy anymore. I really value you in my life, aur main tumhare saath hi aage badhna chahta hoon. 🫂  
+
+Please mujhe bas ek mauka do to show you this new version of me. Give me some time to prove ki main serious hoon. ⏳  
+Let’s not end everything like this... please stay with me?
+</div>
+
+<h2>Do you accept my sorry?</h2>
+
+<button class="yes" onclick="accept()">Yes 💗</button>
+<button class="no">No</button>
+
+<div id="thankyou" class="hidden">
+    <h2 style="margin-top:30px;">Thank you for giving me another chance 🥺❤️</h2>
+</div>
+
+</div>
+
+<script>
+function accept(){
+    document.getElementById("thankyou").classList.remove("hidden");
+}
+</script>
+
+</body>
+</html>
