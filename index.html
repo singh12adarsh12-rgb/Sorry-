@@ -5,41 +5,96 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For You ❤️</title>
 
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
 <style>
 body{
     margin:0;
     padding:0;
     background: linear-gradient(to bottom right, #0f0f1a, #1c1c3a);
-    font-family: 'Segoe UI', sans-serif;
-    color: white;
+    font-family:'Poppins', sans-serif;
+    color:white;
     text-align:center;
-    overflow-x:hidden;
+    overflow:hidden;
 }
 
+/* TAP SCREEN */
+#startScreen{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:linear-gradient(to bottom right,#1c1c3a,#000);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:20;
+    cursor:pointer;
+}
+
+#startScreen h1{
+    font-family:'Great Vibes', cursive;
+    font-size:38px;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.1);}
+    100%{transform:scale(1);}
+}
+
+/* CLOUDS */
+.cloud{
+    position:fixed;
+    top:0;
+    width:50%;
+    height:100%;
+    background:white;
+    z-index:10;
+    transition:2.5s ease-in-out;
+}
+.left{ left:0; }
+.right{ right:0; }
+
+.open .left{ transform:translateX(-100%);}
+.open .right{ transform:translateX(100%);}
+
+/* CONTENT */
 .container{
     padding:40px 20px;
-    animation: fadeIn 3s ease-in-out;
+    opacity:0;
+    transition:2s;
 }
+.show{ opacity:1; }
 
-.lyrics{
-    max-width:800px;
-    margin:30px auto;
-    font-size:20px;
-    line-height:1.8;
+.typing{
     white-space:pre-line;
+    display:inline-block;
 }
 
+/* LYRICS */
+#lyrics{
+    font-family:'Great Vibes', cursive;
+    font-size:34px;
+    line-height:1.6;
+}
+
+/* NOTE */
 .note{
     max-width:750px;
-    margin:50px auto;
-    font-size:19px;
-    line-height:1.8;
+    margin:40px auto;
+    font-size:20px;
+    line-height:1.9;
+    font-family:'Playfair Display', serif;
     background: rgba(255,255,255,0.08);
-    padding:30px;
+    padding:35px;
     border-radius:20px;
     backdrop-filter: blur(10px);
 }
 
+/* BUTTONS */
 button{
     padding:15px 35px;
     font-size:18px;
@@ -47,6 +102,7 @@ button{
     border-radius:30px;
     cursor:pointer;
     margin:20px;
+    font-family:'Poppins', sans-serif;
     transition:0.3s;
 }
 
@@ -54,94 +110,174 @@ button{
     background:#ff4e6a;
     color:white;
 }
-
 .yes:hover{
     transform:scale(1.1);
-    background:#ff2e52;
+    box-shadow:0 0 20px #ff4e6a;
 }
 
 .no{
     background:gray;
     color:white;
-    pointer-events:none; /* makes it unclickable */
-    opacity:0.6;
 }
 
-.hidden{
-    display:none;
+/* HEARTS */
+.heart{
+    position:fixed;
+    bottom:-20px;
+    font-size:20px;
+    animation:floatUp 6s linear infinite;
+}
+@keyframes floatUp{
+    0%{transform:translateY(0);}
+    100%{transform:translateY(-100vh);}
 }
 
-@keyframes fadeIn{
-    from{opacity:0;}
-    to{opacity:1;}
-}
+.hidden{display:none;}
 </style>
 </head>
 
 <body>
 
-<!-- Add your own mp3 file named song.mp3 -->
-<audio autoplay loop>
+<!-- TAP SCREEN -->
+<div id="startScreen">
+    <h1>💖 Tap to Open My Heart 💖</h1>
+    <p>Turn your volume on 🎵</p>
+</div>
+
+<!-- CLOUDS -->
+<div class="cloud left"></div>
+<div class="cloud right"></div>
+
+<!-- AUDIO -->
+<audio id="bgMusic" loop>
     <source src="song.mp3" type="audio/mpeg">
 </audio>
 
-<div class="container">
+<div class="container" id="content">
 
-<div class="lyrics">
-✨🌙 Hmmm… hmmm… 🌙✨
-
-Dehleez pe mere dil ki ❤️🚪  
-Jo rakhe hain tune kadam 👣💫  
-Tere naam pe meri zindagi 📝💕  
-Likh di, mere humdum 💖🌹  
-
-Haan sikha maine jeena… jeena kaise jeena 🌸✨  
-Haan sikha maine jeena, mere humdum 💞🥹  
-Na sikha kabhi jeena… jeena kaise jeena 💭🌧️  
-Na sikha jeena tere bina, humdum 💔🌌  
-
-💫💞  
-
-Dehleez pe mere dil ki ❤️🚪  
-Jo rakhe hain tune kadam 👣💫  
-Tere naam pe meri zindagi 📝💕  
-Likh di, mere humdum 💖🌹  
-
-Haan sikha maine jeena… jeena kaise jeena 🌸✨  
-Haan sikha maine jeena, mere humdum 💞🥹  
-Na sikha kabhi jeena… jeena kaise jeena 💭🌧️  
-Na sikha jeena tere bina, humdum 💔🌌  
-
-🌹✨ Tum ho toh zindagi hai… tum nahi toh bas khamoshi hai. ✨🌹
-</div>
+<h2 id="lyrics" class="typing"></h2>
 
 <div class="note">
-I know mere bachpana (immaturity) ki wajah se tum kaafi pareshan ho gayi ho, and I totally get why you don’t want to be in a relationship right now. 😔  
-I’ve realized ki sirf "sorry" bolne se ab kuch nahi hoga, mujhe apne actions se prove karna padega. 🛠️  
-
-Main sach mein apne aap ko change kar raha hoon — not just for us, but for myself too. 🧘‍♂️  
-I don’t want to be that immature guy anymore. I really value you in my life, aur main tumhare saath hi aage badhna chahta hoon. 🫂  
-
-Please mujhe bas ek mauka do to show you this new version of me. Give me some time to prove ki main serious hoon. ⏳  
-Let’s not end everything like this... please stay with me?
+    <p id="noteText" class="typing"></p>
 </div>
 
-<h2>Do you accept my sorry?</h2>
+<!-- QUESTION SECTION (HIDDEN INITIALLY) -->
+<div id="questionSection" class="hidden">
+    <h2 style="font-family:'Playfair Display',serif;">
+        Do you accept my sorry?
+    </h2>
 
-<button class="yes" onclick="accept()">Yes 💗</button>
-<button class="no">No</button>
+    <button class="yes" onclick="accept()">Yes 💗</button>
+    <button class="no" id="noBtn">No</button>
+</div>
 
 <div id="thankyou" class="hidden">
-    <h2 style="margin-top:30px;">Thank you for giving me another chance 🥺❤️</h2>
+    <h2 style="font-family:'Great Vibes',cursive; font-size:36px;">
+        Thank you for giving me another chance 🥺❤️
+    </h2>
 </div>
 
 </div>
 
 <script>
+
+/* TEXT CONTENT */
+let lyricsText = `
+✨🌙 Hmmm… hmmm… 🌙✨
+
+Dehleez pe mere dil ki ❤️🚪
+Jo rakhe hain tune kadam 👣💫
+Tere naam pe meri zindagi 📝💕
+Likh di, mere humdum 💖🌹
+
+Tum ho toh zindagi hai…
+tum nahi toh bas khamoshi hai.
+`;
+
+let noteContent = `
+I know mere bachpana (immaturity) ki wajah se tum kaafi pareshan ho gayi ho.
+Sirf sorry bolne se ab kuch nahi hoga.
+
+Main sach mein apne aap ko change kar raha hoon — not just for us but for myself.
+I really value you in my life.
+
+Please mujhe bas ek mauka do.
+Give me some time to prove ki main serious hoon.
+Let’s not end everything like this...
+please stay with me?
+`;
+
+/* TYPING FUNCTION WITH CALLBACK */
+function typeWriter(element, text, speed, callback){
+    let i=0;
+    function typing(){
+        if(i < text.length){
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typing, speed);
+        } else {
+            if(callback) callback();
+        }
+    }
+    typing();
+}
+
+/* TAP START */
+document.getElementById("startScreen").addEventListener("click", function(){
+
+    document.getElementById("bgMusic").play();
+    this.style.display="none";
+
+    document.body.classList.add("open");
+    document.getElementById("content").classList.add("show");
+
+    setTimeout(()=>{ 
+        typeWriter(document.getElementById("lyrics"), lyricsText,40); 
+    },2000);
+
+    setTimeout(()=>{ 
+        typeWriter(
+            document.getElementById("noteText"), 
+            noteContent, 
+            35,
+            function(){
+                document.getElementById("questionSection").classList.remove("hidden");
+            }
+        ); 
+    },7000);
+
+});
+
+/* RUNNING NO BUTTON */
+let noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseover", function(){
+    noBtn.style.position="absolute";
+    let x = Math.random() * (window.innerWidth - 120);
+    let y = Math.random() * (window.innerHeight - 60);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+});
+
+/* YES BUTTON */
 function accept(){
     document.getElementById("thankyou").classList.remove("hidden");
 }
+
+/* FLOATING HEARTS */
+function createHeart(){
+    let heart=document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML="💖";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(Math.random()*20+15)+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>{heart.remove();},6000);
+}
+setInterval(createHeart,500);
+
 </script>
 
 </body>
 </html>
+
+
